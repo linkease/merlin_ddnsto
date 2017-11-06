@@ -114,6 +114,7 @@ function init(){
     conf_to_obj();
     buildswitch();
     toggle_switch();
+    version_show();
     $j("#ddnsto_website").click(
         function() {
         window.open("https://ddns.to");
@@ -336,7 +337,22 @@ function LoadingLocalProgress(seconds){
 function reload_Soft_Center(){
     location.href = "/Main_Soft_center.asp";
 }
-
+function version_show(){
+    $j.ajax({
+        url: 'https://koolshare.ngrok.wang/ddnsto/config.json.js',
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(res) {
+            if(typeof(res["version"]) != "undefined" && res["version"].length > 0) {
+                if(res["version"] == db_ddnsto["ddnsto_version"]){
+                    $j("#ddnsto_version_show").html("插件版本：" + res["version"]);
+                   }else if(res["version"] > db_ddnsto["ddnsto_version"]) {
+                    $j("#ddnsto_version_show").html("<font color=\"#66FF66\">有新版本：" + res.version + "</font>");
+                }
+            }
+        }
+    });
+}
 </script>
 </head>
 <body onload="init();">
@@ -415,6 +431,7 @@ function reload_Soft_Center(){
                                                             </div>
                                                         </label>
                                                     </div>
+                                                    <div id="ddnsto_version_show" style="padding-top:5px;margin-left:30px;margin-top:0px;float: left;">插件版本：<% dbus_get_def("ddnsto_version", "未知"); %></div>
                                                     <div id="ddnsto_changelog_show" style="padding-top:5px;margin-right:50px;margin-top:0px;float: right;"><a href="https://raw.githubusercontent.com/koolshare/merlin_ddnsto/master/Changelog.txt" target="_blank"><em><u>[ 更新日志 ]</u></em></a></div>
                                                 </td>
                                             </tr>
