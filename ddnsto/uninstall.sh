@@ -2,7 +2,7 @@
 eval `dbus export ddnsto_`
 source /koolshare/scripts/base.sh
 MODULE=ddnsto
-cd /
+cd /tmp
 killall ddnsto || true
 rm -rf /koolshare/init.d/S70ddnsto.sh
 rm -rf /koolshare/bin/ddnsto
