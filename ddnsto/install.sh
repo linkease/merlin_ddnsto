@@ -2,7 +2,7 @@
 
 MODULE=ddnsto
 title="DDNSTO远程控制"
-VERSION="2.2"
+VERSION="2.4"
 cd /
 rm -rf /koolshare/init.d/S70ddnsto.sh
 cp -rf /tmp/$MODULE/bin/* /koolshare/bin/
@@ -10,7 +10,6 @@ cp -rf /tmp/$MODULE/scripts/* /koolshare/scripts/
 cp -rf /tmp/$MODULE/webs/* /koolshare/webs/
 cp -rf /tmp/$MODULE/res/* /koolshare/res/
 cp -rf /tmp/$MODULE/init.d/* /koolshare/init.d/
-cp -rf /tmp/$MODULE/uninstall.sh /koolshare/scripts/uninstall_ddnsto.sh
 rm -fr /tmp/ddnsto* >/dev/null 2>&1
 killall ${MODULE}
 chmod +x /koolshare/bin/ddnsto
