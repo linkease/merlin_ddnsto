@@ -2,7 +2,7 @@
 
 MODULE=ddnsto
 title="DDNSTO远程控制"
-VERSION="2.6"
+VERSION="2.7"
 cd /
 rm -rf /koolshare/init.d/S70ddnsto.sh
 cp -rf /tmp/$MODULE/bin/* /koolshare/bin/
@@ -33,7 +33,7 @@ if [[ "${str_ddnsto_token}" == "" ]]; then
     dbus remove ddnsto_password
     dbus remove ddnsto_name
 else
-    if [ "${ddnsto_enable}"x = "1"x ];then
+    if [ "${str_ddnsto_en}"x = "1"x ];then
         sh /koolshare/scripts/ddnsto_config.sh
     fi
 fi
