@@ -12,7 +12,7 @@ ntp_sync(){
 }
 ddnsto_cron_job(){
     if [ "${ddnsto_enable}"x = "1"x ]; then
-        cru a ddnsto_check "*/5 * * * * /koolshare/scripts/ddnsto_config.sh"
+        cru a ddnsto_check "*/5 * * * * /koolshare/scripts/ddnsto_check.sh"
     else
         cru d ddnsto_check >/dev/null 2>&1
     fi
@@ -20,7 +20,7 @@ ddnsto_cron_job(){
 ddnsto_nat_start(){
     if [ "${ddnsto_enable}"x = "1"x ];then
         echo_date 添加nat-start触发事件...
-        dbus set __event__onnatstart_ddnsto="/koolshare/scripts/ddnsto_config.sh"
+        dbus set __event__onnatstart_ddnsto="/koolshare/scripts/ddnsto_check.sh"
     else
         echo_date 删除nat-start触发...
         dbus remove __event__onnatstart_ddnsto
@@ -29,10 +29,7 @@ ddnsto_nat_start(){
 onstart(){
     ntp_sync
     if [ "${ddnsto_enable}"x = "1"x ];then
-        ddnsto_status=`ps | grep -w ddnsto | grep -cv grep`
-        if [ "${ddnsto_status}"x != "2"x ];then
-            killall ddnsto
-        fi
+        killall ddnsto
         ddnsto -u ${ddnsto_token} -d
         ddnsto_cron_job
         ddnsto_nat_start
