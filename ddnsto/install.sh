@@ -2,7 +2,7 @@
 
 MODULE=ddnsto
 title="DDNSTO远程控制"
-VERSION="2.5"
+VERSION="2.6"
 cd /
 rm -rf /koolshare/init.d/S70ddnsto.sh
 cp -rf /tmp/$MODULE/bin/* /koolshare/bin/
