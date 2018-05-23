@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- version: 1.8 -->
+<!-- version: 2.8 -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="images/favicon.png"/>
 <link rel="icon" href="images/favicon.png"/>
 <title>软件中心 - DDNSTO远程控制</title>
-<link rel="stylesheet" type="text/css" href="index_style.css"/> 
+<link rel="stylesheet" type="text/css" href="index_style.css"/>
 <link rel="stylesheet" type="text/css" href="form_style.css"/>
 <link rel="stylesheet" type="text/css" href="css/element.css">
 <script language="JavaScript" type="text/javascript" src="/state.js"></script>
@@ -21,7 +21,8 @@
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/switcherplugin/jquery.iphone-switch.js"></script>
 <script type="text/javascript" src="/dbconf?p=ddnsto&v=<% uptime(); %>"></script>
-<style> .Bar_container {
+<style>
+.Bar_container {
     width:85%;
     height:20px;
     border:1px inset #999;
@@ -65,7 +66,25 @@
 input[type=button]:focus {
     outline: none;
 }
-
+.cloud_main_radius_left{
+    -webkit-border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    border-radius: 10px 0 0 10px;
+}
+.cloud_main_radius_right{
+    -webkit-border-radius: 0 10px 10px 0;
+    -moz-border-radius: 0 10px 10px 0;
+    border-radius: 0 10px 10px 0;
+}
+.cloud_main_radius{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.cloud_main_radius h2 { border-bottom:1px #AAA dashed;}
+.cloud_main_radius h3,
+.cloud_main_radius h4 { font-size:12px;font-weight:normal;font-style: normal;}
+.cloud_main_radius h5 { color:#FFF;font-weight:normal;font-style: normal;}
 </style>
 <script>
 var noChange_status = 0;
@@ -81,6 +100,7 @@ function init() {
     conf_to_obj();
     buildswitch();
     toggle_switch();
+    notice_show();
     version_show();
 }
 
@@ -301,7 +321,27 @@ function LoadingLocalProgress(seconds) {
 function reload_Soft_Center() {
     location.href = "/Main_Soft_center.asp";
 }
-
+function notice_show(){
+    $.ajax({
+        url: 'https://koolshare.ngrok.wang/ddnsto/push_message.json.js',
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function(res) {
+			$("#push_titile").html(res.title);
+			$("#push_content1").html(res.content1);
+			$("#push_content2").html(res.content2);
+			$("#push_content3").html(res.content3);
+			if(res.content4){
+				document.getElementById("push_content4_li").style.display = "";
+				$("#push_content4").html(res.content4);
+			}
+			if(res.content5){
+				document.getElementById("push_content5_li").style.display = "";
+				$("#push_content5").html(res.content5);
+			}
+        }
+    });
+}
 function version_show() {
     $.ajax({
         url: 'https://koolshare.ngrok.wang/ddnsto/config.json.js',
@@ -374,9 +414,44 @@ function version_show() {
                                                 <img src="/images/New_ui/export/line_export.png">
                                             </div>
                                             <div class="SimpleNote">
-                                                <li>ddnsto远程控制是koolshare小宝开发的，支持http2的远程控制。<em>仅支持远程管理路由器+nas+windows远程桌面（暂未开放）！</em></li>
-                                                <li><i>【注意】：请保护好你的DDNSTO/EasyExplorer的Token，如果被其他人获知，那么下一个摄影大师可能就是你！！！</i></li>
-                                                <li> DDNSTO仅提供给koolshare固件用户维护路由器使用，请勿用于反动、不健康等用途！！！</li>
+                                              <table width="100%" height="150px" style="border-collapse:collapse;">
+                                                <tr bgcolor="#444f53">
+                                                    <td colspan="5" bgcolor="#444f53" class="cloud_main_radius">
+                                                        <div style="padding:10px;width:95%;font-style:italic;">
+                                                            <br/><br/>
+                                                          <table width="100%" >
+                                                              <tr>
+                                                                  <td>
+                                                                      <ul style="margin-top:-50px;padding-left:15px;" >
+                                                                          <li style="margin-top:-5px;">
+                                                                              <h2 id="push_titile"><em>欢迎使用DDNSTO</em></h2>
+                                                                          </li>
+                                                                          <li style="margin-top:-5px;">
+                                                                              <h4 id="push_content1" >ddnsto远程控制是koolshare小宝开发的，支持http2的远程控制。<em>仅支持远程管理路由器+nas+windows远程桌面（暂未开放）！</em></h4>
+                                                                          </li>
+                                                                          <li  style="margin-top:-5px;">
+                                                                              <h4 id="push_content2"><i>【注意】：请保护好你的DDNSTO/EasyExplorer的Token，如果被其他人获知，那么下一个摄影大师可能就是你！！！</i></h4>
+                                                                          </li>
+                                                                          <li  style="margin-top:-5px;">
+                                                                              <h4 id="push_content3">DDNSTO仅提供给koolshare固件用户维护路由器使用，请勿用于反动、不健康等用途！！！</h4>
+                                                                          </li>
+                                                                          <li id="push_content4_li" style="margin-top:-5px;display: none;">
+                                                                              <h4 id="push_content4"></h4>
+                                                                          </li>
+                                                                          <li id="push_content5_li" style="margin-top:-5px;display: none;">
+                                                                              <h4 id="push_content5"></h4>
+                                                                          </li>
+                                                                      </ul>
+                                                                  </td>
+                                                              </tr>
+                                                          </table>
+                                                        </div>
+                                                      </td>
+                                                  </tr>
+                                                  <tr height="10px">
+                                                      <td colspan="3"></td>
+                                                  </tr>
+                                              </table>
                                             </div>
                                             <table width="100%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#6b8fa3" class="FormTable">
                                                 <thead>
@@ -422,7 +497,7 @@ function version_show() {
                                                 <tr id="rule_update_switch">
                                                     <th>管理/帮助</th>
                                                     <td>
-                                                        <a type="button" class="ddnsto_btn" style="cursor:pointer" target="_blank" href="https://ddns.to">https://ddns.to</a>
+                                                        <a type="button" class="ddnsto_btn" style="cursor:pointer" target="_blank" href="https://www.ddnsto.com">https://www.ddnsto.com</a>
                                                         <a type="button" class="ddnsto_btn" style="cursor:pointer" onclick="openShutManager(this,'NoteBox',false,'关闭使用说明','ddnsto使用说明') ">ddnsto使用说明</a>
                                                     </td>
                                                 </tr>
