@@ -2,7 +2,7 @@
 
 MODULE=ddnsto
 title="DDNSTO远程控制"
-VERSION="2.9"
+VERSION="2.9.1"
 cd /
 rm -rf /koolshare/init.d/S70ddnsto.sh
 cp -rf /tmp/$MODULE/bin/* /koolshare/bin/
@@ -26,8 +26,6 @@ dbus set softcenter_module_ddnsto_name=${MODULE}
 dbus set softcenter_module_ddnsto_version="${VERSION}"
 dbus set softcenter_module_ddnsto_title="ddnsto远程控制"
 dbus set softcenter_module_ddnsto_description="ddnsto：koolshare小宝开发的基于http2的远程控制，仅支持远程管理路由器+nas+windows远程桌面。"
-dbus set ddnsto_enable=0
-dbus set ddnsto_token=""
 str_ddnsto_token=`dbus get ddnsto_token`
 str_ddnsto_en=`dbus get ddnsto_enable`
 if [[ "${str_ddnsto_token}" == "" ]]; then
