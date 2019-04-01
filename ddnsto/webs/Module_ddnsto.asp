@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<!-- version: 2.9.1 -->
+<!-- version: 2.9.2 -->
 <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
@@ -323,7 +323,7 @@ function reload_Soft_Center() {
 }
 function notice_show(){
     $.ajax({
-        url: 'https://koolshare.ngrok.wang/ddnsto/push_message.json.js',
+        url: 'https://ks.ddnsto.com/ddnsto/push_message.json.js',
         type: 'GET',
         dataType: 'jsonp',
         success: function(res) {
@@ -344,7 +344,7 @@ function notice_show(){
 }
 function version_show() {
     $.ajax({
-        url: 'https://koolshare.ngrok.wang/ddnsto/config.json.js',
+        url: 'https://ks.ddnsto.com/ddnsto/config.json.js',
         type: 'GET',
         dataType: 'jsonp',
         success: function(res) {
